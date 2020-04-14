@@ -6,9 +6,13 @@ module.exports = (app) => {
     AuthenticationPolicy.register,
     AuthenticationController.register)
 
+  app.post('/login',
+    AuthenticationController.login)
+
   app.get('/status', (req, res) => {
     res.send({
       message: 'Hello World!'
     })
   })
+
 }

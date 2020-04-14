@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) =>
-  sequelize.define('User', {
+  sequelize.define('program_parameters', {
     program_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       unique: true
     },
     parameter_name: DataTypes.STRING,
