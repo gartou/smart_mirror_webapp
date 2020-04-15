@@ -52,7 +52,7 @@ module.exports = {
         })
       }
 
-      console.log(user.toString())
+      console.log(user.toJSON())
       const isPasswordValid = await user.comparePassword(password)
       console.log("pw status: "+isPasswordValid)
       if (!isPasswordValid) {
