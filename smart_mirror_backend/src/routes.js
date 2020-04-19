@@ -18,22 +18,28 @@ module.exports = (app) => {
     AuthenticationController.login)
 
   // USER
-  app.post('/usersettings',
-    UserDataController.usersettings)
+  app.post('/alluserdata',
+    UserDataController.getalluserdata)
 
-  app.post('/usermirrorsettings',
-    UserDataController.usermirrorsettings)
+  app.post('/setusersettings',
+    UserDataController.setusersettings)
 
-  app.post('/userpics',
-    UserDataController.userpics)
+  app.post('/setusermirrorsettings',
+    UserDataController.setusermirrorsettings)
 
-  app.post('/useremail',
-    UserDataController.useremail)
+  app.post('/setuserpics',
+    UserDataController.setuserpics)
 
-  app.post('/username',
-    UserDataController.username)
+  app.post('/setuseremail',
+    UserDataController.setuseremail)
 
-  app.post('/userName',
-    UserDataController.userName)
+  app.post('/setusername',
+    UserDataController.setusername)
+
+  app.post('/setuserfirstname',
+    UserDataController.setuserFirstName)
+
+  app.post('/setuserlastname',
+    UserDataController.setuserLastName)
 
 }
