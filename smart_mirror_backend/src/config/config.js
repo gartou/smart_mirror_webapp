@@ -1,12 +1,12 @@
 module.exports = {
   port: process.env.PORT || 8081,
   db: {
-    database: process.env.DB_NAME || 'datable',
-    user: process.env.DB_USER || 'mirror',
-    password: process.env.DB_PASSWORD || 'mirror',
+    database: process.env.DB_NAME || '',
+    user: process.env.DB_USER || '',
+    password: process.env.DB_PASSWORD || '',
     options: {
-      dialect: process.env.DIALECT || 'mariadb',
-      host: process.env.HOST || 'cst04.ddns.net',
+      dialect: process.env.DIALECT || '',
+      host: process.env.HOST || '',
       port: 44444
     }
   },

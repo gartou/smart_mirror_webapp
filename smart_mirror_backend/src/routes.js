@@ -1,7 +1,11 @@
+// AUTH
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationPolicy = require('./policies/AuthenticationPolicy')
-
+// USER
 const UserDataController = require('./controllers/UserDataController')
+
+const multer = require('multer')
+const upload = multer()
 
 module.exports = (app) => {
   app.get('/status', (req, res) => {
@@ -28,7 +32,7 @@ module.exports = (app) => {
     UserDataController.setusermirrorsettings)
 
   app.post('/setuserpics',
-    UserDataController.setuserpics)
+    UserDataController.getuserpics)
 
   app.post('/setuseremail',
     UserDataController.setuseremail)
@@ -41,5 +45,10 @@ module.exports = (app) => {
 
   app.post('/setuserlastname',
     UserDataController.setuserLastName)
+
+  app.post('/uploadimg', upload.single('file'), UserDataController.uploadImageFile)
+
+  app.post('/getuserpics', 
+    UserDataController.getuserpics)
 
 }

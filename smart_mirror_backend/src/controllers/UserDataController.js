@@ -1,4 +1,4 @@
-const { usersParams } = require('../models')
+const { usersParams, pictures } = require('../models')
 
 module.exports = {
   async getalluserdata (req,res) {
@@ -57,8 +57,106 @@ module.exports = {
   },
 
   // userpics SECTION
-  async setuserpics (req,res) {
+  async getuserpics (req,res) {
+    const { username } = req.body
 
+    try {
+      const userP = await usersParams.findOne({
+        where: {
+          parameter_name: 'username',
+          parameter_value: username
+        }
+      })
+  
+      if (userP == null) {
+        return res.status(403).send({
+          error: "Pictures could not be downloaded"
+        })
+      }
+
+      const pics = await pictures.findAll({
+        where: {
+          user_id: userP.user_id
+        }
+      })
+
+      if (pics == null) {
+        return res.status(403).send({
+          error: "Pictures could not be downloaded"
+        })
+      }
+
+      res.send({
+        pictures: pics
+      })
+
+    } catch (err) {
+      res.status(500).send({
+        error: "Something went wrong on our end!"+err
+      })
+    }
+  },
+
+  async uploadImageFile (req,res) {
+    const { username } = req.body
+    const byteContent = req.file
+
+    try {
+      const userP = await usersParams.findOne({
+        where: {
+          parameter_name: 'username',
+          parameter_value: username
+        }
+      })
+  
+      if (userP == null) {
+        return res.status(403).send({
+          error: "Update wasn't successfull!"
+        })
+      }
+
+      const pic = await pictures.create({user_id: userP.user_id, picture: byteContent.buffer})
+
+      console.log(pic)
+      if (pic == null) {
+        return res.status(403).send({
+          error: "Picture error"
+        })
+      }
+  
+      res.send({
+        msg: "ok"
+      })
+  
+    } catch (err) {
+      res.status(500).send({
+        error: "Something went wrong on our end!"+err
+      })
+    }
+  }
+}
+
+async function GetUser(username, res) {
+  try {
+    const userP = await usersParams.findOne({
+      where: {
+        parameter_name: 'username',
+        parameter_value: username
+      }
+    })
+
+    if (userP == null) {
+      return res.status(403).send({
+        error: "Something went wrong on our end!"
+      })
+    } else {
+      return userP
+    }
+
+  } catch (err) {
+    res.status(500).send({
+      error: "Something went wrong on our end!"+err
+    })
   }
 }
 

@@ -28,7 +28,10 @@ module.exports = {
       await usersParams.create({ user_id: uid, parameter_name: 'email', parameter_value: email_string })
       await usersParams.create({ user_id: uid, parameter_name: 'username', parameter_value: username})
       // const jane = await User.create({ firstName: "Jane", lastName: "Doe" });
-      res.send(luser.toJSON())
+      res.send({
+        respo: "ok",
+        msg: 'Registration was successful!'
+      })
     } catch (err) {
       console.log(err)
       res.status(400).send({

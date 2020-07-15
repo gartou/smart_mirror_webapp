@@ -1,17 +1,25 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-import vuetify from '@/plugins/vuetify'
+/* eslint-disable */
 
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import { sync } from 'vuex-router-sync'
+import vuetify from './plugins/vuetify'
+import store from './store/store.js'
+import createPersistedState from 'vuex-persistedstate'
+import Glitch from 'vue-glitch'
+
+Vue.component('glitch', Glitch)
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+export default function ({ store, app: { router } }) {
+  sync(store, router)
+  // [... some custom logic (watchers, etc.) omitted ...]
+}
+
 new Vue({
-  el: '#app',
   router,
+  store,
   vuetify,
-  components: { App },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')
